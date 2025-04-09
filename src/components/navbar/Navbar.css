@@ -57,4 +57,20 @@ body{
 .navbar-links ul li{
     margin-right: 10px;
     list-style: none;
+} 
+
+.login-button{
+  cursor: pointer;
+  border-radius: 5px;
+  padding-inline: 17px;
+  padding-block: 8px;
+  border: none;
+  background-color: rgb(7, 130, 201);
+  color: rgb(253, 253, 253);
+  font-size: medium;
+}
+
+.login-button:hover{
+  transform: scale(1.1);
+  transition: all 0.3s;
 }

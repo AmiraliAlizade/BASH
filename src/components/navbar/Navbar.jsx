@@ -18,7 +18,7 @@ export default function Navbar() {
         </div>
         <div className="navbar-links">
           <ul>
-            <li><button>Login</button></li>
+            <li><button className="login-button">Login</button></li>
           </ul>
         </div>
       </div>
