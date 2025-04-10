@@ -4,11 +4,12 @@ body{
 }
 
 .navbar-header {
-  background-color:#51e2f5;
+  background-color:#9ef1fc;
   margin: 0;
   display: flex;
   width: 100%;
   align-items: center;
+  /* position: fixed; */
 }
 
 .navbar-items {
@@ -24,7 +25,8 @@ body{
 }
 
 .navbar-logo img {
-    width: 50px;
+    width: 150px;
+    height: 100px;
 }
 
 .navbar-search {
@@ -38,7 +40,7 @@ body{
     padding-inline: 8px;
     padding-block:9px;
     border-radius: 10px;
-    border: 0.5px solid rgb(253, 253, 253);
+    border: 0.5px solid #fdfdfd;
 }
 
 .navbar-search input:focus{
@@ -67,10 +69,22 @@ body{
   border: none;
   background-color: rgb(7, 130, 201);
   color: rgb(253, 253, 253);
-  font-size: medium;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
 }
 
 .login-button:hover{
   transform: scale(1.1);
   transition: all 0.3s;
+ 
+
+
 }
+
+.user-icon{
+  width: 13px;
+  margin-right: 4px;
+} 
+
+

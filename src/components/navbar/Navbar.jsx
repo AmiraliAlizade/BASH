@@ -1,13 +1,14 @@
 import React from "react";
 import './Navbar.css'
-import home from "../../data/home_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png";
+import house from "../../data/bash-high-resolution-logo.png";
+import { FaUser } from "react-icons/fa";
 
 export default function Navbar() {
   return (
     <header className="navbar-header">
       <div className="navbar-items">
         <div className="navbar-logo">
-          <img src={home}></img>
+          <img src={house}></img>
         </div>
         <div className="navbar-search">
           <input
@@ -18,7 +19,7 @@ export default function Navbar() {
         </div>
         <div className="navbar-links">
           <ul>
-            <li><button className="login-button">Login</button></li>
+            <li><button className="login-button"><FaUser className="user-icon"></FaUser>Login</button></li>
           </ul>
         </div>
       </div>
