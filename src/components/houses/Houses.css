@@ -9,7 +9,6 @@ body {
 }
 
 .houses-list {
-
   width: 100%;
   padding: 0;
 }
@@ -23,14 +22,20 @@ body {
   border-radius: 8px;
   border: 0.4px solid rgb(250, 250, 250);
   background-color: rgb(250, 250, 250);
-margin-left: 5px;
+  margin-left: 5px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
+.houses-item:hover {
+  cursor: pointer;
+  transform: scale(0.96);
+  transition: all 0.4s;
+}
 .house-props {
   width: 65%;
   display: flex;
   flex-direction: column;
-  gap: 8rem;
+  
   justify-content: space-between;
 }
 .house-img img {
@@ -55,8 +60,31 @@ margin-left: 5px;
   text-align: center;
 }
 
-.house-info span{
-    padding-inline: 10px;
-    padding-block: 3px;
-    background-color: blue;
+.house-info span {
+  padding-inline: 15px;
+  padding-block: 5px;
+  background-color: #9ef1fc;
+  border-radius: 8px;
+  text-align: center;
 }
+.date-icon {
+  margin-left: 4px;
+}
+
+
+.house-description{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.7rem;
+  margin-bottom: 4rem;
+}
+
+.house-description p{
+  width: 50%;
+  font-size: small;
+  text-align: center;
+  opacity: 2px;
+}
+
