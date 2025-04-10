@@ -11,6 +11,12 @@ body {
 .houses-list {
   width: 100%;
   padding: 0;
+  overflow: scroll;
+  max-height: 33rem;
+}
+
+.houses-list::-webkit-scrollbar {
+  display: none;
 }
 
 .houses-item {
@@ -24,6 +30,7 @@ body {
   background-color: rgb(250, 250, 250);
   margin-left: 5px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin-top: 5px;
 }
 
 .houses-item:hover {
@@ -35,7 +42,6 @@ body {
   width: 65%;
   display: flex;
   flex-direction: column;
-  
   justify-content: space-between;
 }
 .house-img img {
@@ -71,8 +77,7 @@ body {
   margin-left: 4px;
 }
 
-
-.house-description{
+.house-description {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -81,10 +86,9 @@ body {
   margin-bottom: 4rem;
 }
 
-.house-description p{
+.house-description p {
   width: 50%;
   font-size: small;
   text-align: center;
   opacity: 2px;
 }
-
