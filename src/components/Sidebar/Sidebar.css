@@ -1,0 +1,25 @@
+.sidebar {
+  width: 30%;
+  display: flex;
+  justify-content: start;
+  flex-direction: row-reverse;
+}
+
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0;
+  justify-content: start;
+  padding: 2rem;
+  gap: 13%;
+  list-style: none;
+  background-color: rgb(250, 250, 250);
+  border: rgb(226, 226, 226);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.sidebar-item {
+    font-size: large;
+    font-weight: 500;
+}
