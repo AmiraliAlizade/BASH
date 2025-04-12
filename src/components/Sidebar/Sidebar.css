@@ -11,6 +11,7 @@
   width: 50%;
   margin: 0;
   justify-content: start;
+  align-items: center;
   padding: 2rem;
   gap: 13%;
   list-style: none;
@@ -20,6 +21,29 @@
 }
 
 .sidebar-item {
-    font-size: large;
-    font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: rgb(250, 250, 250);
+  padding: 0.5rem 1rem;
+  display: flex;
+  border-radius: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+.sidebar-item:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;  transform: none;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.help-icon{
+  margin-right: 4px;
+}
+
+.settings-icon{
+  margin-right: 4px;
+}
+.account-icon{
+  margin-right: 4px;
 }

@@ -1,5 +1,5 @@
 import "./Houses.css";
-import house from "../../data/bash-high-resolution-logo.png";
+import house from "../../data/images.jpg";
 import { TbMeterSquare } from "react-icons/tb";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import { FaDollarSign } from "react-icons/fa";
