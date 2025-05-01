@@ -1,0 +1,47 @@
+.house-review-wrapper {
+  display: flex;
+  width: 75%;
+  margin-left: 0;
+  align-items: start;
+  justify-content: start;
+  margin: 1rem;
+  margin-right: 2rem;
+}
+
+.house-review {
+  display: flex;
+  width: 100%;
+  border-radius: 8px;
+  height: 35.52rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.house-review-props{
+  width:50%;
+}
+
+.house-review-info {
+  width: 100%;
+  padding: 1rem;
+}
+
+.house-review-img {
+  width: 50%;
+}
+
+.house-review-img img {
+  width: 45rem;
+  max-width: 100%;
+  border-radius: 8px;
+}
+.title-wrapper{
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+.house-review-title {
+  white-space: nowrap;
+
+  margin: auto;
+}

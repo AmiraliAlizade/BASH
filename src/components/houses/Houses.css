@@ -50,6 +50,7 @@ body {
   max-width: 100%;
   outline: none;
 }
+
 .house-img {
   width: 35%;
 }
@@ -69,9 +70,10 @@ body {
 .house-info span {
   padding-inline: 15px;
   padding-block: 5px;
-  background-color: #9ef1fc;
+  background-color:#118cf0;
   border-radius: 8px;
   text-align: center;
+  color: white;
 }
 .date-icon {
   margin-left: 4px;
@@ -83,12 +85,14 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 0.7rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 }
 
 .house-description p {
-  width: 50%;
-  font-size: small;
+  width: 50ch;
+  font-size: medium;
+  text-overflow: ellipsis;
+  font-weight: 300;
   text-align: center;
   opacity: 2px;
 }

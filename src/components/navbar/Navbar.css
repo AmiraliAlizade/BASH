@@ -4,7 +4,7 @@ body{
 }
 
 .navbar-header {
-  background-color:#9ef1fc;
+  background-color:#118cf0;
   margin: 0;
   display: flex;
   width: 100%;
@@ -25,8 +25,8 @@ body{
 }
 
 .navbar-logo img {
-    width: 150px;
-    height: 100px;
+    width: 100px;
+    height: 50px;
 }
 
 .navbar-search {
@@ -45,7 +45,7 @@ body{
 
 .navbar-search input:focus{
     width: 80%;
-    border: 2px solid rgb(7, 130, 201);
+    border: 3px solid #022f8fdc;
     transform: none;
     transition: all 0.4s;
 }
@@ -67,7 +67,7 @@ body{
   padding-inline: 17px;
   padding-block: 8px;
   border: none;
-  background-color: rgb(7, 130, 201);
+  background-color: #022f8fdc;
   color: rgb(253, 253, 253);
   font-size: 16px;
   display: flex;
@@ -78,8 +78,6 @@ body{
   transform: scale(1.1);
   transition: all 0.3s;
  
-
-
 }
 
 .user-icon{

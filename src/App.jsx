@@ -1,14 +1,18 @@
-import { Route, BrowserRouter, Routes } from "react-router";
-import Home from "./pages/Home";
+import { Route, Routes } from "react-router";
+import Home from "./pages/HomePage";
+import HouseReviewPage from "./pages/HouseReviewPage";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route index pathname="/" element={<Home replace to="home"></Home>} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route index  element={<Home replace to="home"></Home>} />
+        <Route
+          index
+          path="/houseReview"
+          element={<HouseReviewPage></HouseReviewPage>}
+        />
+      </Routes>
     </>
   );
 }

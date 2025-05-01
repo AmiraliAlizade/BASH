@@ -1,14 +1,18 @@
 .sidebar {
-  width: 30%;
+  width: 25%;
   display: flex;
+  height: 33.4rem;
   justify-content: start;
   flex-direction: row-reverse;
+  margin-right: 0;
 }
 
 .sidebar-list {
   display: flex;
   flex-direction: column;
   width: 50%;
+  height: 100%;
+  height: 100%;
   margin: 0;
   justify-content: start;
   align-items: center;
@@ -32,18 +36,19 @@
 }
 
 .sidebar-item:hover {
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;  transform: none;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  transform: none;
   transition: 0.3s;
   cursor: pointer;
 }
 
-.help-icon{
+.help-icon {
   margin-right: 4px;
 }
 
-.settings-icon{
+.settings-icon {
   margin-right: 4px;
 }
-.account-icon{
+.account-icon {
   margin-right: 4px;
 }
