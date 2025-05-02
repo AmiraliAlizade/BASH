@@ -14,6 +14,8 @@
   border-radius: 8px;
   height: 35.52rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background-color: rgb(250, 250, 250);
+
 }
 
 .house-review-props{
@@ -21,12 +23,14 @@
 }
 
 .house-review-info {
-  width: 100%;
+  width: 90%;
   padding: 1rem;
+
 }
 
 .house-review-img {
   width: 50%;
+  border-right: 0.5px solid rgb(236, 229, 229);
 }
 
 .house-review-img img {
@@ -41,7 +45,28 @@
   align-items: center;
 }
 .house-review-title {
-  white-space: nowrap;
 
   margin: auto;
+}
+
+
+.review-info-list{
+  list-style: none;
+  margin-top: 3rem;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap:2rem;
+}
+
+.review-info-item{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-weight: 100;
+  border-top: 0.5px solid rgb(221, 221, 221);
+  border-bottom: 0.5px solid rgb(221, 221, 221);
+  padding-block: 4px;
+  color: rgb(87, 87, 87);
 }

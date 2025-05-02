@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div>
       <Navbar></Navbar>
-      <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+      <div style={{ display: "flex", flexDirection: "row-reverse", justifyContent:'space-between' }}>
         <Houses></Houses>
         <Sidebar></Sidebar>
       </div>
