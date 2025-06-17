@@ -1,3 +1,6 @@
+::-webkit-scrollbar {
+  display: none;
+}
 .house-review-wrapper {
   display: flex;
   width: 75%;
@@ -13,24 +16,28 @@
   width: 100%;
   border-radius: 8px;
   height: 35.52rem;
+
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   background-color: rgb(250, 250, 250);
-
+  overflow: hidden;
 }
 
-.house-review-props{
-  width:50%;
+.house-review-props {
+  width: 50%;
+  margin-top: 1rem;
+  overflow-y: scroll;
 }
 
 .house-review-info {
   width: 90%;
-  padding: 1rem;
-
 }
 
-.house-review-img {
+.house-review-contact {
   width: 50%;
   border-right: 0.5px solid rgb(236, 229, 229);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .house-review-img img {
@@ -38,29 +45,29 @@
   max-width: 100%;
   border-radius: 8px;
 }
-.title-wrapper{
+.title-wrapper {
   width: 100%;
   text-align: center;
   display: flex;
   align-items: center;
 }
 .house-review-title {
-
   margin: auto;
 }
 
-
-.review-info-list{
+.review-info-list {
   list-style: none;
   margin-top: 3rem;
   width: 90%;
   display: flex;
+  margin: 3rem auto;
+  margin-bottom: 0;
   justify-content: center;
   flex-direction: column;
-  gap:2rem;
+  gap: 2rem;
 }
 
-.review-info-item{
+.review-info-item {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -70,3 +77,113 @@
   padding-block: 4px;
   color: rgb(87, 87, 87);
 }
+
+.info-item-value {
+  display: flex;
+  text-align: center;
+  gap: 4px;
+}
+.info-item-value img {
+  width: 1rem;
+}
+
+.info-card-list {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 5%;
+}
+
+.card-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+  padding: 1.5rem;
+  margin-top: 0;
+  padding-bottom: 0.57rem;
+  background-color: rgb(230, 230, 230);
+  border: 0.4px solid rgb(211, 210, 210);
+  border-radius: 20%;
+}
+
+.card-list-item img {
+  width: 4rem;
+}
+
+.info-description-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 7%;
+  border-radius: 8px;
+  margin-right: 7%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin-top: 2rem;
+}
+
+.info-description {
+  display: flex;
+  width: 87%;
+  font-weight: 600;
+  margin-top: 2px;
+  color: rgb(82, 82, 82);
+}
+
+.info-address-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 7%;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.info-address {
+  display: flex;
+  width: 87%;
+  font-weight: 600;
+  margin-top: 2px;
+  color: rgb(82, 82, 82);
+}
+
+.icon-wrapper {
+  height: 1.8rem;
+  width: 95%;
+  display: flex;
+  justify-content: start;
+  align-items: end;
+}
+
+.contact-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: end;
+  margin-top: 0.5rem;
+}
+
+.contact-button {
+  margin-bottom: 1rem;
+  padding: 1rem 6rem;
+  font-size: larger;
+  background-color: #34ec34;
+  border: none;
+  width: 20%;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.contact-button:hover {
+  transform: scale(1.05);
+  transition: all 0.4s;
+}
+

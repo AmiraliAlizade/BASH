@@ -1,6 +1,7 @@
-import HouseReview from "../components/houseReview/houseReview";
+import HouseReview from "../components/HouseReview/HouseReview";
 import Navbar from "../components/navbar/Navbar";
 import Sidebar from "../components/sidebar/Sidebar";
+import ContactModal from "../components/Modals/ContactModal";
 
 export default function HouseReviewPage() {
   return (
@@ -9,6 +10,7 @@ export default function HouseReviewPage() {
       <div style={{display:"flex", width:"100%"}}>
         <Sidebar></Sidebar>
         <HouseReview></HouseReview>
+     
       </div>
     </>
   );

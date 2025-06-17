@@ -1,0 +1,59 @@
+.container {
+  width: 100vh;
+  height: 100vh;
+}
+
+.contact-modal-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 90%;
+
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.8px);
+  -webkit-backdrop-filter: blur(5.8px);
+  border: 1px solid rgba(255, 255, 255, 0.33);
+}
+
+.contact-modal {
+  display: flex;
+  padding: 6rem 6rem;
+  justify-content: center;
+  border-radius: 7px;
+  margin: auto;
+  width: 20rem;
+  background-color: rgb(250, 250, 250);
+  position: relative;
+  height: 15rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.contact-info-list {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  flex-direction: column;
+}
+
+.contact-info-item {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  border: 0.7px solid rgb(212, 212, 212);
+  padding: 0.5rem;
+  margin-right: 2rem;
+  border-radius: 7px;
+  width: 20rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  top: 5%;
+  position: absolute;
+}
