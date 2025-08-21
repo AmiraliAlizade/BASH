@@ -19,7 +19,7 @@
   align-items: center;
   padding: 2rem;
   gap: 13%;
-  
+
   list-style: none;
   background-color: rgb(250, 250, 250);
   border: rgb(226, 226, 226);
@@ -35,6 +35,8 @@
   border-radius: 8px;
   align-items: center;
   width: 100%;
+  text-decoration: none;
+  color: black;
 }
 
 .sidebar-item:hover {

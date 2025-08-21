@@ -11,15 +11,19 @@ import "./HouseReview.css";
 
 import { useState } from "react";
 import ContactModal from "../Modals/ContactModal";
+import { useLocation, useSearchParams } from "react-router";
 export default function HouseReview() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const { House } = location.state || {};
+
   return (
     <>
       <div className="house-review-wrapper">
         <div className="house-review">
           <div className="house-review-contact">
             <div className="house-review-img">
-              <img src={house} alt="" />
+              <img src={House.image} alt="" />
             </div>
             <div className="contact-button-wrapper">
               <button
@@ -33,38 +37,40 @@ export default function HouseReview() {
           <div className="house-review-props">
             <div className="house-review-info">
               <div className="title-wrapper">
-                <h1 className="house-review-title">A big villa in the LA</h1>
+                <h1 className="house-review-title">{House.title}</h1>
               </div>
               <ul className="review-info-list">
                 <li className="review-info-item">
                   <span className="info-item-title">Price</span>
                   <span className="info-item-value">
                     <img src={dollar} alt="" />
-                    200000
+                    {House.price}
                   </span>
                 </li>
                 <li className="review-info-item">
                   <span className="info-item-title">Made in</span>
                   <span className="info-item-value">
                     <img src={event} alt="" />
-                    2023
+                    {House.madeIn}
                   </span>
                 </li>
                 <li className="review-info-item">
                   <span className="info-item-title">Size</span>
                   <span className="info-item-value">
                     <img src={measuring} alt="" />
-                    400
+                    {House.size}
                   </span>
                 </li>
               </ul>
 
               <ul className="info-card-list">
                 <li className="card-list-item">
-                  <img src={bathroom} alt="" />2
+                  <img src={bathroom} alt="" />
+                  {House.numBathroom}
                 </li>
                 <li className="card-list-item">
-                  <img src={bedroom} alt="" />2
+                  <img src={bedroom} alt="" />
+                  {House.numBedroom}
                 </li>
               </ul>
               <div
@@ -79,30 +85,14 @@ export default function HouseReview() {
                   <div className="icon-wrapper">
                     <img src={location} alt="" />
                   </div>
-                  <p className="info-address">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley
-                  </p>
+                  <p className="info-address">{House.address}</p>
                 </div>
               </div>
               <div className="info-description-wrapper">
                 <div className="icon-wrapper">
                   <img src={description} alt="" />
                 </div>
-                <p className="info-description">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was popularised in the 1960s with
-                  the release of Letraset sheets containing Lorem Ipsum
-                  passages, and more recently with desktop publishing software
-                  like Aldus PageMaker including versions of Lorem Ipsum.
-                </p>
+                <p className="info-description">{House.description}</p>
               </div>
             </div>
           </div>

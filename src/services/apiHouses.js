@@ -1,0 +1,26 @@
+export async function getHouses() {
+  const SupabaseKey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJzaHZvcG9ibWZ1cmV0aWFrZmF0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NDEyOTg3MCwiZXhwIjoyMDY5NzA1ODcwfQ.Lz7rnqP_9fORlnHVoQ2YgXkFqVfNSndM2V7_NuSxx5Y";
+  try {
+    const data = await fetch(
+      "https://rshvopobmfuretiakfat.supabase.co/rest/v1/Houses?select=*",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${SupabaseKey}`,
+          apikey: SupabaseKey,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!data.ok) {
+      throw new Error(data.status);
+    }
+    const Houses = await data.json();
+
+    return Houses;
+  } catch (error) {
+    console.error(error);
+  }
+}
