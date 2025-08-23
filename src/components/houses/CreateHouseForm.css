@@ -22,10 +22,40 @@
   display: flex;
   gap: 2rem;
   justify-content: space-between;
+  align-items: center;
   padding: 2rem;
 }
 
+.house-form-input {
+  padding: 10px;
+  width: 70%;
+  border-radius: 7px;
+  border: 0.2px solid gray;
+}
 
-.house-form-input{
-  width: 50%;
+.house-form-input:hover {
+  border: 0.7px solid #118cf0;
+}
+
+.house-form-input:focus {
+  border: 2px solid #118cf0;
+
+  outline: none;
+}
+
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.form-submit-button {
+  width: 30%;
+  border: none;
+  padding: 15px 10px;
+  background-color: #118cf0;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
 }

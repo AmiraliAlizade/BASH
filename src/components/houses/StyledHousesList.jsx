@@ -4,9 +4,17 @@ import { TbMeterSquare } from "react-icons/tb";
 import { BsFillCalendarDateFill } from "react-icons/bs";
 import { FaDollarSign } from "react-icons/fa";
 import Paragraph from "../../ui/Paragraph";
+import Error from "../../ui/Error";
 import { Link } from "react-router";
+import Spinner from "../../ui/Spinner";
 
 function StyledHousesList({ Houses, isLoading, error }) {
+  if (isLoading) {
+    return <Spinner />;
+  }
+  if (error) {
+    return <Error>Could not load the Houses!</Error>;
+  }
   return (
     <>
       <div className="houses-list-container">
