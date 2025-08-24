@@ -62,7 +62,7 @@ export async function createHouse(house) {
 
     console.log(lastRow);
     const uploadImage = await fetch(
-      `https://rshvopobmfuretiakfa.supabase.co/storage/v1/object/Images//${imageName}`,
+      `https://rshvopobmfuretiakfat.supabase.co/storage/v1/object/Images//${imageName}`,
       {
         method: "POST",
         headers: {
@@ -75,7 +75,7 @@ export async function createHouse(house) {
       }
     );
 
-    if (!uploadImage.ok) {
+    if (uploadImage && !uploadImage.ok) {
       const res = await fetch(
         `https://rshvopobmfuretiakfat.supabase.co/rest/v1/Houses?id=eq.${lastRow.id}`,
         {
@@ -95,9 +95,9 @@ export async function createHouse(house) {
     const data = text ? JSON.parse(text) : null;
     return data;
   } catch (error) {
-    if (!uploadImage.ok) {
-      return error;
-    }
+    // if (uploadImage && !uploadImage.ok) {
+    //   return error;
+    // }
     return null;
   }
 }

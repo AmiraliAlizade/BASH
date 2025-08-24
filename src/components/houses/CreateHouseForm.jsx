@@ -3,36 +3,43 @@ import "./CreateHouseForm.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createHouse } from "../../services/apiHouses";
 import toast from "react-hot-toast";
+import FormError from "../../ui/FormError";
 
 function CreateHouseForm() {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
   const queryClient = useQueryClient();
   const {
-    isLoading,
     mutate: CreateHouse,
+    isPending,
     error,
   } = useMutation({
     mutationFn: createHouse,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["houses"],
-      });
       toast.success("The house was successfully created!", {
         duration: 3000,
         position: "top-center",
       });
+      queryClient.invalidateQueries({
+        queryKey: ["houses"],
+      });
     },
-    onError: () => {
-      toast.error("The house can't be created!", {
+    onError: (err) => {
+      toast.error(`The house can't be created!${err.message}`, {
         duration: 5000,
         position: "top-center",
       });
+      console.error(err);
     },
   });
 
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
-
     CreateHouse({ ...data, image: image });
     reset();
   }
@@ -45,56 +52,84 @@ function CreateHouseForm() {
         <div className="house-form-item">
           <label className="house-form-label"> Title </label>
           <input
-            {...register("title", { required: "This field is required!" })}
+            {...register("title", {
+              required: "Title is required for creating AD!",
+            })}
             type="text"
             className="house-form-input"
+            disabled={isPending}
           />
         </div>
+        {errors?.title ? <FormError error={errors?.title?.message} /> : null}
         <div className="house-form-item">
           <label className="house-form-label">Size</label>
           <input
-            {...register("size", { required: "This field is required!" })}
+            {...register("size", {
+              required: "Size is required for creating AD!",
+            })}
             type="number"
             className="house-form-input"
             min={1}
             step={1}
+            disabled={isPending}
           />
+          {errors?.size ? <FormError error={errors?.size?.message} /> : null}
         </div>
         <div className="house-form-item">
           <label className="house-form-label">Price</label>
           <input
-            {...register("price", { required: "This field is required!" })}
+            {...register("price", {
+              required: "Price is required for creating AD!",
+            })}
             type="number"
             className="house-form-input"
             min={1}
             step={1}
+            disabled={isPending}
           />
+          {errors?.price ? <FormError error={errors?.price?.message} /> : null}
         </div>
         <div className="house-form-item">
           <label className="house-form-label">Made in</label>
           <input
-            {...register("madeIn", { required: "This field is required!" })}
-            type="number"
-            className="house-form-input"
+            {...register("madeIn", {
+              required: "Made in year is required for creating AD!",
+            })}
+            type="date"
+            className="house-form-date"
             min={1}
             step={1}
+            disabled={isPending}
           />
+          {errors?.madeIn ? (
+            <FormError error={errors?.madeIn?.message} />
+          ) : null}
         </div>
         <div className="house-form-item">
           <label className="house-form-label">Address</label>
           <textarea
-            {...register("address", { required: "This field is required!" })}
+            {...register("address", {
+              required: "Address is required for creating AD!",
+            })}
             className="house-form-input"
+            disabled={isPending}
           />
+          {errors?.address ? (
+            <FormError error={errors?.address?.message} />
+          ) : null}
         </div>
         <div className="house-form-item">
           <label className="house-form-label">Description</label>
           <textarea
             {...register("description", {
-              required: "This field is required!",
+              required: "Description is required for creating AD!",
             })}
             className="house-form-input"
+            disabled={isPending}
           />
+          {errors?.description ? (
+            <FormError error={errors?.description?.message} />
+          ) : null}
         </div>
         <div className="house-form-item">
           <label className="house-form-label">Number of bathrooms</label>
@@ -103,17 +138,28 @@ function CreateHouseForm() {
             type="number"
             className="house-form-input"
             {...register("numBathroom", {
-              required: "This field is required!",
+              required:
+                "descriptioner of bathrooms is required for creating AD!",
             })}
+            disabled={isPending}
           />
+          {errors?.numBathroom ? (
+            <FormError error={errors?.numBathroom?.message} />
+          ) : null}
         </div>{" "}
         <div className="house-form-item">
           <label className="house-form-label">Number of bedrooms</label>
           <input
-            {...register("numBedroom", { required: "This field is required!" })}
+            {...register("numBedroom", {
+              required: "Number of bedrooms is required for creating AD!",
+            })}
             type="number"
             className="house-form-input"
+            disabled={isPending}
           />
+          {errors?.numBedroom ? (
+            <FormError error={errors?.numBedroom?.message} />
+          ) : null}
         </div>
         <div className="house-form-item">
           <label className="house-form-label">House Image</label>
@@ -121,6 +167,7 @@ function CreateHouseForm() {
             {...register("image")}
             type="file"
             className="house-form-input"
+            disabled={isPending}
           />
         </div>
         <div className="button-wrapper">
