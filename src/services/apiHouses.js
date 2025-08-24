@@ -57,11 +57,47 @@ export async function createHouse(house) {
       throw new Error(`Request failed: ${response.status}`);
     }
 
+    const Data = await response.json();
+    const lastRow = Data[0];
+
+    console.log(lastRow);
+    const uploadImage = await fetch(
+      `https://rshvopobmfuretiakfa.supabase.co/storage/v1/object/Images//${imageName}`,
+      {
+        method: "POST",
+        headers: {
+          apikey: SupabaseKey,
+          Authorization: `Bearer ${SupabaseKey}`,
+          "Content-Type": "application/json",
+          Prefer: "return=representation",
+        },
+        body: house?.image,
+      }
+    );
+
+    if (!uploadImage.ok) {
+      const res = await fetch(
+        `https://rshvopobmfuretiakfat.supabase.co/rest/v1/Houses?id=eq.${lastRow.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            apikey: SupabaseKey,
+            Authorization: `Bearer ${SupabaseKey}`,
+          },
+        }
+      );
+      throw new Error(
+        "The image upload was failed! and the House creation canceled!"
+      );
+    }
+
     const text = await response.text();
     const data = text ? JSON.parse(text) : null;
     return data;
   } catch (error) {
-    console.error("Fetch error:", error);
+    if (!uploadImage.ok) {
+      return error;
+    }
     return null;
   }
 }

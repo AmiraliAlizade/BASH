@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import "./CreateHouseForm.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createHouse } from "../../services/apiHouses";
+import toast from "react-hot-toast";
 
 function CreateHouseForm() {
   const { register, handleSubmit, reset } = useForm();
@@ -16,15 +17,22 @@ function CreateHouseForm() {
       queryClient.invalidateQueries({
         queryKey: ["houses"],
       });
+      toast.success("The house was successfully created!", {
+        duration: 3000,
+        position: "top-center",
+      });
     },
     onError: () => {
-      console.error(error);
+      toast.error("The house can't be created!", {
+        duration: 5000,
+        position: "top-center",
+      });
     },
   });
 
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
-    console.log(data.image[0]);
+
     CreateHouse({ ...data, image: image });
     reset();
   }
@@ -110,7 +118,7 @@ function CreateHouseForm() {
         <div className="house-form-item">
           <label className="house-form-label">House Image</label>
           <input
-            {...register("image", { required: "This field is required!" })}
+            {...register("image")}
             type="file"
             className="house-form-input"
           />
