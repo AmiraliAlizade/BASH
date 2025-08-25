@@ -70,6 +70,7 @@ function CreateHouseForm() {
             type="number"
             className="house-form-input"
             min={1}
+            max={100000}
             step={1}
             disabled={isPending}
           />
@@ -84,6 +85,7 @@ function CreateHouseForm() {
             type="number"
             className="house-form-input"
             min={1}
+            max={100000000}
             step={1}
             disabled={isPending}
           />
@@ -141,12 +143,14 @@ function CreateHouseForm() {
               required:
                 "descriptioner of bathrooms is required for creating AD!",
             })}
+            max={10}
+            min={1}
             disabled={isPending}
           />
           {errors?.numBathroom ? (
             <FormError error={errors?.numBathroom?.message} />
           ) : null}
-        </div>{" "}
+        </div>
         <div className="house-form-item">
           <label className="house-form-label">Number of bedrooms</label>
           <input
@@ -155,6 +159,8 @@ function CreateHouseForm() {
             })}
             type="number"
             className="house-form-input"
+            min={1}
+            max={20}
             disabled={isPending}
           />
           {errors?.numBedroom ? (

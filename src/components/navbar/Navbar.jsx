@@ -1,7 +1,8 @@
 import React from "react";
-import './Navbar.css'
+import "./Navbar.css";
 import house from "../../data/bash-high-resolution-logo.png";
 import { FaUser } from "react-icons/fa";
+import { Link } from "react-router";
 
 export default function Navbar() {
   return (
@@ -19,7 +20,13 @@ export default function Navbar() {
         </div>
         <div className="navbar-links">
           <ul>
-            <li><button className="login-button"><FaUser className="user-icon"></FaUser>Login</button></li>
+            <Link to="/login">
+              <li>
+                <button className="login-button">
+                  <FaUser className="user-icon"></FaUser>Login
+                </button>
+              </li>
+            </Link>
           </ul>
         </div>
       </div>
