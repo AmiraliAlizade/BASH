@@ -24,7 +24,7 @@ function LoginForm() {
         />
       </div>
       {/* {errors?.title ? <FormError error={errors?.title?.message} /> : null} */}
-      <div className="auth-form-item">
+      <div className="auth-form-item"> 
         <label className="house-form-label">Size</label>
         <input
           {...register("password", {
