@@ -3,8 +3,10 @@ import "./Navbar.css";
 import house from "../../data/bash-high-resolution-logo.png";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router";
+import { UseAuth } from "../../ui/AuthContext";
 
 export default function Navbar() {
+  const { SignUp, SignIn } = UseAuth();
   return (
     <header className="navbar-header">
       <div className="navbar-items">
@@ -20,13 +22,21 @@ export default function Navbar() {
         </div>
         <div className="navbar-links">
           <ul>
-            <Link to="/login">
+            <Link to="/signUp">
               <li>
                 <button className="login-button">
-                  <FaUser className="user-icon"></FaUser>Login
+                  <FaUser className="user-icon"></FaUser>
+                  Sign up/Sign In
                 </button>
               </li>
             </Link>
+
+            <li>
+              <button className="login-button">
+                <FaUser className="user-icon"></FaUser>
+                Log out
+              </button>
+            </li>
           </ul>
         </div>
       </div>

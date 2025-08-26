@@ -5,7 +5,8 @@ import ProfilePage from "./pages/ProfilePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CreateHouseForm from "./components/houses/CreateHouseForm";
 import { Toaster } from "react-hot-toast";
-import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 
 const queryClient = new QueryClient();
 function App() {
@@ -17,7 +18,8 @@ function App() {
           <Route path="/houseReview" element={<HouseReviewPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/registerAd" element={<CreateHouseForm />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/signIn" element={<SignIn />} />
         </Routes>
       </QueryClientProvider>
       <Toaster />
