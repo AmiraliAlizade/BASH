@@ -1,5 +1,6 @@
-import AuthContextProvider from "../ui/AuthContext";
-import SignInForm from "../ui/SignInForm";
+import AuthContextProvider from "../authentication/AuthContext";
+import SignInForm from "../authentication/SignInForm";
+
 
 function SignIn() {
   return (

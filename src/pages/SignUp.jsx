@@ -1,5 +1,5 @@
-import AuthContextProvider from "../ui/AuthContext";
-import SignUpForm from "../ui/SignUpForm";
+import AuthContextProvider from "../authentication/AuthContext";
+import SignUpForm from "../authentication/SignUpForm";
 
 function SignUp() {
   return (
@@ -9,5 +9,4 @@ function SignUp() {
   );
 }
 
-
-export default SignUp
+export default SignUp;

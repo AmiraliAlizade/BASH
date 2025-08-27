@@ -1,3 +1,4 @@
+import { data } from "react-router";
 import { supabaseKey, supabaseUrl } from "./supabase";
 
 export async function signUpUser({ email, password }) {
@@ -9,20 +10,24 @@ export async function signUpUser({ email, password }) {
         headers: {
           apikey: supabaseKey,
           "Content-Type": "application/json",
-          Authorization: `Bearer ${supabaseKey}`,
         },
         body: JSON.stringify({ email: email, password: password }),
       }
     );
 
     const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.msg || "Sign up faild !");
+    }
+
     return data;
   } catch (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 }
 
-export async function loginUser({ email, password }) {
+export async function signInUser({ email, password }) {
   try {
     const res = await fetch(
       `https://rshvopobmfuretiakfat.supabase.co/auth/v1/token?grant_type=password`,
@@ -31,7 +36,6 @@ export async function loginUser({ email, password }) {
         headers: {
           "Content-Type": "application/json",
           apikey: supabaseKey,
-          Authorization: `Bearer ${supabaseKey}`,
         },
         body: JSON.stringify({
           email,
@@ -42,26 +46,46 @@ export async function loginUser({ email, password }) {
 
     const data = await res.json();
 
-    if (!res.ok) {
-      console.error("Login failed:", data);
-      return null;
-    }
-
     // Successful login
     console.log("Login successful:", data);
+    console.log(data);
+    if (!res.ok) {
+      throw new Error(data.msg || "Sign up faild !");
+    }
+
     return data;
   } catch (error) {
-    console.error("Error logging in:", error);
+    throw new Error(error);
   }
 }
 
-export async function getUser() {
+export async function getUser(userToken) {
   try {
-    fetch("https://rshvopobmfuretiakfat.supabase.co/auth/v1/user", {
-      method: "GET",
+    const response = await fetch(
+      "https://rshvopobmfuretiakfat.supabase.co/auth/v1/user",
+      {
+        method: "GET",
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
+    const User = await response.json();
+    return User;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function logOutUser(userToken) {
+  try {
+    await fetch("https://rshvopobmfuretiakfat.supabase.co/auth/v1/logout", {
+      method: "POST",
       headers: {
         apikey: supabaseKey,
-        Authorization: `Bearer ${supabaseKey}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
       },
     });
   } catch (error) {

@@ -1,20 +1,25 @@
-import "./SignInForm.css";
-import { UseAuth } from "./AuthContext";
 import { useForm } from "react-hook-form";
+import "./SignUpForm.css";
+import { UseAuth } from "../authentication/AuthContext";
+import { Link } from "react-router";
 
-function SignInForm() {
+function SignUpForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { error },
   } = useForm();
 
-  const { SignIn } = UseAuth();
+  // const { SignUp } = UseAuth();
+  // const { data } = SignUp();
+  const { SignUp } = UseAuth();
 
+  // const { data: userData } = SignUp();
   async function onSubmit(data) {
     try {
-      const result = await SignIn(data.email, data.password);
-      console.log(result?.msg);
+      await SignUp(data.email, data.password);
+
+      // console.log(result?.msg);
     } catch (err) {
       console.error("Sign up error:", err);
     }
@@ -33,7 +38,7 @@ function SignInForm() {
             disabled={false}
           />
         </div>
-        {errors?.email ? <FormError error={errors?.title?.message} /> : null}
+        {/* {errors?.title ? <FormError error={errors?.title?.message} /> : null} */}
         <div className="auth-form-item">
           <label className="auth-form-label">Password</label>
           <input
@@ -47,16 +52,17 @@ function SignInForm() {
             step={1}
             disabled={false}
           />
-          {errors?.password ? (
-            <FormError error={errors?.password?.message} />
-          ) : null}
+          {/* {errors?.size ? <FormError error={errors?.size?.message} /> : null} */}
         </div>
+        <p>
+          Already you have an account ? <Link to="/signIn"> Sign In</Link>
+        </p>
         <div className="button-wrapper">
-          <button className="form-submit-button">Sign In</button>
+          <button className="form-submit-button">Sign Up</button>
         </div>
       </form>
     </div>
   );
 }
 
-export default SignInForm;
+export default SignUpForm;

@@ -1,21 +1,20 @@
+import "./SignInForm.css";
+import { UseAuth } from "../authentication/AuthContext";
 import { useForm } from "react-hook-form";
-import "./SignUpForm.css";
-import { UseAuth } from "./AuthContext";
 import { Link } from "react-router";
 
-function SignUpForm() {
+function SignInForm() {
   const {
     register,
     handleSubmit,
-    formState: { error },
+    formState: { errors },
   } = useForm();
 
-  const { SignUp } = UseAuth();
+  const { SignIn } = UseAuth();
 
   async function onSubmit(data) {
     try {
-      const result = await SignUp(data.email, data.password);
-      // console.log(result?.msg);
+      const { session } = await SignIn(data.email, data.password);
     } catch (err) {
       console.error("Sign up error:", err);
     }
@@ -34,7 +33,7 @@ function SignUpForm() {
             disabled={false}
           />
         </div>
-        {/* {errors?.title ? <FormError error={errors?.title?.message} /> : null} */}
+        {errors?.email ? <FormError error={errors?.title?.message} /> : null}
         <div className="auth-form-item">
           <label className="auth-form-label">Password</label>
           <input
@@ -48,17 +47,19 @@ function SignUpForm() {
             step={1}
             disabled={false}
           />
-          {/* {errors?.size ? <FormError error={errors?.size?.message} /> : null} */}
+          {errors?.password ? (
+            <FormError error={errors?.password?.message} />
+          ) : null}
         </div>
         <p>
-          Already you have an account ? <Link to="/signIn"> Sign In</Link>
+          Don't have any account ? <Link to="/signUp"> Sign Up Now</Link>
         </p>
         <div className="button-wrapper">
-          <button className="form-submit-button">Sign Up</button>
+          <button className="form-submit-button">Sign In</button>
         </div>
       </form>
     </div>
   );
 }
 
-export default SignUpForm;
+export default SignInForm;
