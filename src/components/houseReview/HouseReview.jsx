@@ -12,10 +12,12 @@ import "./HouseReview.css";
 import { useState } from "react";
 import ContactModal from "../Modals/ContactModal";
 import { useLocation, useSearchParams } from "react-router";
+import { useUserInfo } from "../Users/UserInfoContextProvider";
 export default function HouseReview() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { House } = location.state || {};
+
 
   return (
     <>

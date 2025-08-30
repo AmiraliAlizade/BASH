@@ -37,7 +37,7 @@ function AuthContextProvider({ children }) {
     },
 
     onSuccess: () => {
-      toast.success("The sign up was successfull !", {
+      toast.success("Sign up was successfull !", {
         duration: 3000,
         position: "top-center",
       });
@@ -65,7 +65,7 @@ function AuthContextProvider({ children }) {
       return session;
     },
     onSuccess: () => {
-      toast.success("The house was successfully created!", {
+      toast.success("Sign in was successfull !", {
         duration: 3000,
         position: "top-center",
       });
@@ -73,7 +73,7 @@ function AuthContextProvider({ children }) {
       navigate("/");
     },
     onError: (err) => {
-      toast.error(`The house can't be created!${err.message}`, {
+      toast.error(`The sign in was not successfull !${err.message}`, {
         duration: 5000,
         position: "top-center",
       });
