@@ -16,8 +16,8 @@ export default function Profile() {
   const { id, fullName, phoneNumber, email, instagram, telegram } = firstUser;
   const { register, handleSubmit, trigger } = useForm();
   const userId = firstUser?.id;
-  console.log(userId);
-  if (isLoading || !id || !userInfo?.[0]?.id) {
+
+  if (isLoading) {
     return <Spinner />;
   }
 
@@ -25,7 +25,7 @@ export default function Profile() {
     toast.error(error);
   }
   function onSubmit(data) {
-    UpdateUserInfo(data, id);
+    UpdateUserInfo(data, userId);
   }
 
   return (
@@ -61,6 +61,8 @@ export default function Profile() {
                     const isValid = await trigger("phoneNumber");
                     if (isValid) {
                       handleSubmit((data) => onSubmit(data, id))();
+
+                      dispatch({ type: "StopChange" });
                     }
                   }}
                 />

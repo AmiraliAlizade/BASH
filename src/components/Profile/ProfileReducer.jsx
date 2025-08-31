@@ -40,11 +40,24 @@ function reducer(state, action) {
         ChangeInsta: false,
         ChangeTel: true,
       };
+    case "StopChange":
+      return {
+        ...state,
+        ChangePhone: false,
+        ChangeEmail: false,
+        ChangeInsta: false,
+        ChangeTel: false,
+      };
   }
 }
 export default function ProfileReducer() {
-  const [{ ChangeEmail, ChangeInsta, ChangePhone, ChangeTel }, Dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { ChangeEmail, ChangeInsta, ChangePhone, ChangeTel, StopChange },
+    Dispatch,
+  ] = useReducer(reducer, initialState);
 
-  return [{ ChangeEmail, ChangeInsta, ChangePhone, ChangeTel }, Dispatch ];
+  return [
+    { ChangeEmail, ChangeInsta, ChangePhone, ChangeTel, StopChange },
+    Dispatch,
+  ];
 }

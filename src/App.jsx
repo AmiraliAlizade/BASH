@@ -9,6 +9,8 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import CreateUserForm from "./components/Users/createUserForm";
 import UserContextProvider from "./components/Users/UserInfoContextProvider";
+import ProtectedRoute from "./authentication/ProtectedRoute";
+import UserInfoContextProvider from "./components/Users/UserInfoContextProvider";
 
 const queryClient = new QueryClient();
 function App() {
@@ -16,11 +18,37 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <Routes>
-          <Route index element={<Home replace to="home" />} />
+          <Route
+            index
+            element={
+              <ProtectedRoute>
+                <Home replace to="home" />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/houseReview" element={<HouseReviewPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/registerAd" element={<CreateHouseForm />} />
-          <Route path="/createUser" element={<CreateUserForm />} />
+          <Route
+            path="/registerAd"
+            element={
+              <ProtectedRoute>
+                <UserInfoContextProvider>
+                  
+                  <CreateHouseForm />
+                </UserInfoContextProvider>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/createUser"
+            element={
+              <ProtectedRoute>
+                <UserInfoContextProvider>
+                  <CreateUserForm />
+                </UserInfoContextProvider>
+              </ProtectedRoute>
+            }
+          />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/signIn" element={<SignIn />} />
         </Routes>

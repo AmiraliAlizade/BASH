@@ -1,14 +1,27 @@
 import { useForm } from "react-hook-form";
 import "./CreateUserForm.css";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createUserInfo } from "../../services/apiUsers";
 import toast from "react-hot-toast";
 import { UseAuth } from "../../authentication/AuthContext";
 import FormError from "../../ui/FormError";
 import { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router";
+import { useUserInfo } from "./UserInfoContextProvider";
 
 function CreateUserForm() {
   const { user } = UseAuth();
+  const { userInfo, UpdateUserInfo } = useUserInfo();
+  const firstUser = userInfo?.[0] || {};
+  const userId = firstUser?.userId;
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  if (user) {
+    queryClient.invalidateQueries(["UserInfo", user?.id], {
+      refetchInactive: true,
+    });
+  }
+
   const {
     register,
     handleSubmit,
@@ -31,10 +44,11 @@ function CreateUserForm() {
         duration: 3000,
         position: "top-center",
       });
+      navigate("/");
     },
 
     onError: (error) => {
-      toast.error(`The house can't be created!${error.message}`, {
+      toast.error(`The User can't be created!${error.message}`, {
         duration: 5000,
         position: "top-center",
       });
@@ -43,9 +57,19 @@ function CreateUserForm() {
   });
 
   function onSubmit(data) {
-    createUserMutation(data);
-    reset();
+    if (user.id !== userId) {
+      createUserMutation(data);
+      reset();
+    }
+    if (user.id === userId) {
+      UpdateUserInfo(data, userId);
+    }
   }
+
+  if (user.id === userId) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div className="form-wrapper">
       <form className="create-user-form" onSubmit={handleSubmit(onSubmit)}>
@@ -57,6 +81,7 @@ function CreateUserForm() {
             })}
             type="text"
             className="user-form-input"
+            placeholder={firstUser.fullName}
           />
         </div>
         {errors?.fullName ? (
@@ -75,17 +100,17 @@ function CreateUserForm() {
         {errors?.phoneNumber ? (
           <FormError error={errors?.phoneNumber?.message} />
         ) : null}
-        <div className="user-form-item">
+        {/* <div className="user-form-item">
           <label className="user-form-label"> Email </label>
           <input
-            {...register("email")}
-            // value={user.email}
-            disabled={true}
-            type="email"
-            className="user-form-input"
+          {...register("email")}
+          // value={user.email}
+          disabled={true}
+          type="email"
+          className="user-form-input"
           />
-        </div>
-        {errors?.email ? <FormError error={errors?.email?.message} /> : null}
+          </div>
+          {errors?.email ? <FormError error={errors?.email?.message} /> : null} */}
         <div className="user-form-item">
           <label className="user-form-label"> Instagram username </label>
           <input

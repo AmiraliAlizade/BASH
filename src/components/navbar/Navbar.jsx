@@ -1,11 +1,12 @@
 import "./Navbar.css";
 import house from "../../data/bash-high-resolution-logo.png";
 import { FaUser } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { UseAuth } from "../../authentication/AuthContext";
 
 export default function Navbar() {
   const { LogOut, user } = UseAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="navbar-header">
@@ -35,7 +36,10 @@ export default function Navbar() {
               <li>
                 <button
                   className="login-button"
-                  onClick={() => LogOut(user.access_token)}
+                  onClick={() => {
+                    LogOut(user.access_token),
+                      navigate("/signIn", { replace: true });
+                  }}
                 >
                   <FaUser className="user-icon"></FaUser>
                   Log out

@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createContext, useContext } from "react";
 import { getUserInfo, updateUserInfo } from "../../services/apiUsers";
 import { UseAuth } from "../../authentication/AuthContext";
@@ -7,7 +7,7 @@ const UserContext = createContext();
 
 function UserInfoContextProvider({ children }) {
   const { user } = UseAuth();
-
+  const queryClient = useQueryClient();
   const {
     data: userInfo,
     isLoading,
@@ -20,6 +20,9 @@ function UserInfoContextProvider({ children }) {
   const { mutateAsync: updateUserInfoMutation, isPending: isUpdating } =
     useMutation({
       mutationFn: ({ updatedUser, id }) => updateUserInfo(updatedUser, id),
+      onSuccess: () => {
+        queryClient.invalidateQueries(["UserInfo", user?.id]);
+      },
     });
 
   async function UpdateUserInfo(updatedUser, id) {

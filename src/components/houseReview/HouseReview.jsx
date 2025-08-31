@@ -101,7 +101,7 @@ export default function HouseReview() {
         </div>
       </div>
       {isOpen ? (
-        <ContactModal isOpen={isOpen} setIsOpen={setIsOpen}></ContactModal>
+        <ContactModal isOpen={isOpen} setIsOpen={setIsOpen} House={House}></ContactModal>
       ) : null}
     </>
   );

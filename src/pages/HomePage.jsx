@@ -4,11 +4,12 @@ import Sidebar from "../components/sidebar/Sidebar";
 import { getHouses } from "../services/apiHouses";
 import AuthContextProvider from "../authentication/AuthContext";
 import ProtectedRoute from "../authentication/ProtectedRoute";
+import UserInfoContextProvider from "../components/Users/UserInfoContextProvider";
 
 export default function Home() {
   return (
-    <AuthContextProvider>
-      <ProtectedRoute>
+    <UserInfoContextProvider>
+      <AuthContextProvider>
         <div>
           <AuthContextProvider>
             <Navbar></Navbar>
@@ -24,7 +25,7 @@ export default function Home() {
             <Sidebar></Sidebar>
           </div>
         </div>
-      </ProtectedRoute>
-    </AuthContextProvider>
+      </AuthContextProvider>
+    </UserInfoContextProvider>
   );
 }

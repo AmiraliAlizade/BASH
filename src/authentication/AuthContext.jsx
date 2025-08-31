@@ -10,6 +10,7 @@ import {
   signInUser,
   signUpUser,
 } from "../services/apiAuthentication";
+import { useUserInfo } from "../components/Users/UserInfoContextProvider";
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
@@ -18,7 +19,7 @@ function AuthContextProvider({ children }) {
 
   const queryClient = useQueryClient();
 
-  const { data: user } = useQuery({
+  const { data: user, isLoading } = useQuery({
     queryKey: ["User"],
     queryFn: () => getUser(token),
     enabled: !!token,
@@ -43,7 +44,7 @@ function AuthContextProvider({ children }) {
       });
       queryClient.invalidateQueries(["User"]);
       if (!error) {
-        navigate("/");
+        navigate("/createUser");
       }
     },
     onError: (err) => {
@@ -70,7 +71,7 @@ function AuthContextProvider({ children }) {
         position: "top-center",
       });
       queryClient.invalidateQueries(["User"]);
-      navigate("/");
+      navigate("/createUser");
     },
     onError: (err) => {
       toast.error(`The sign in was not successfull !${err.message}`, {
@@ -91,7 +92,9 @@ function AuthContextProvider({ children }) {
   });
 
   async function LogOut(access_token) {
-    await logOutUserMutation(access_token);
+    const data = await logOutUserMutation(access_token);
+    queryClient.invalidateQueries(["User"]);
+    navigate("/signUp");
     setToken(null);
   }
 
@@ -99,6 +102,7 @@ function AuthContextProvider({ children }) {
     try {
       const session = await signUpMutation({ email, password });
       setToken(session.access_token);
+
       if (session.access_token) {
         localStorage.setItem("access_token", session.access_token);
       }
@@ -122,7 +126,7 @@ function AuthContextProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ SignIn, SignUp, LogOut, user }}>
+    <AuthContext.Provider value={{ SignIn, SignUp, LogOut, user, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

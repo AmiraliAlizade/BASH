@@ -4,12 +4,24 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createHouse } from "../../services/apiHouses";
 import toast from "react-hot-toast";
 import FormError from "../../ui/FormError";
+import { useUserInfo } from "../Users/UserInfoContextProvider";
+import Spinner from "../../ui/Spinner";
+import { useEffect } from "react";
 
 function CreateHouseForm() {
+  const { userInfo, isLoading } = useUserInfo();
+  if (isLoading) {
+    return <Spinner />;
+  }
+  const firstUser = userInfo?.[0] || {};
+
+  const { fullName, phoneNumber, email, instagram, telegram } = firstUser;
+
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -37,6 +49,16 @@ function CreateHouseForm() {
       console.error(err);
     },
   });
+
+  useEffect(() => {
+    if (firstUser) {
+      setValue("user_fullName", fullName);
+      setValue("user_phoneNumber", phoneNumber);
+      setValue("user_email", email);
+      setValue("user_instagram", instagram);
+      setValue("user_telegram", telegram);
+    }
+  }, [firstUser, setValue]);
 
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
