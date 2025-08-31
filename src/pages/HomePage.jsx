@@ -7,22 +7,24 @@ import ProtectedRoute from "../authentication/ProtectedRoute";
 
 export default function Home() {
   return (
-    <ProtectedRoute>
-      <div>
-        <AuthContextProvider>
-          <Navbar></Navbar>
-        </AuthContextProvider>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row-reverse",
-            justifyContent: "space-between",
-          }}
-        >
-          <Houses></Houses>
-          <Sidebar></Sidebar>
+    <AuthContextProvider>
+      <ProtectedRoute>
+        <div>
+          <AuthContextProvider>
+            <Navbar></Navbar>
+          </AuthContextProvider>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              justifyContent: "space-between",
+            }}
+          >
+            <Houses></Houses>
+            <Sidebar></Sidebar>
+          </div>
         </div>
-      </div>
-    </ProtectedRoute>
+      </ProtectedRoute>
+    </AuthContextProvider>
   );
 }

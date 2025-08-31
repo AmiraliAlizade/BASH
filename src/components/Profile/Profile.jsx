@@ -3,22 +3,30 @@ import Spinner from "../../ui/Spinner";
 import { useUserInfo } from "../Users/UserInfoContextProvider";
 import "./Profile.css";
 import ProfileReducer from "./ProfileReducer";
+import { useForm } from "react-hook-form";
 
 export default function Profile() {
   const [{ ChangeEmail, ChangeInsta, ChangePhone, ChangeTel }, dispatch] =
     ProfileReducer();
-  const { userInfo, isLoading, error } = useUserInfo();
+  const { userInfo, isLoading, error, UpdateUserInfo, isUpdating } =
+    useUserInfo();
 
-  if (isLoading) {
+  const firstUser = userInfo?.[0] || {};
+
+  const { id, fullName, phoneNumber, email, instagram, telegram } = firstUser;
+  const { register, handleSubmit, trigger } = useForm();
+  const userId = firstUser?.id;
+  console.log(userId);
+  if (isLoading || !id || !userInfo?.[0]?.id) {
     return <Spinner />;
   }
 
   if (error) {
     toast.error(error);
   }
-  const firstUser = userInfo?.[0] || {};
-
-  const { fullName, phoneNumber, email, instagram, telegram } = firstUser;
+  function onSubmit(data) {
+    UpdateUserInfo(data, id);
+  }
 
   return (
     <div className="profile-container">
@@ -27,7 +35,7 @@ export default function Profile() {
           <h1>{fullName}</h1>
         </header>
 
-        <form action="" className="profile-info-list">
+        <form className="profile-info-list">
           <ul className="profile-info-list">
             <li className="profile-info-item">
               <label className="item-title">Phone </label>
@@ -44,9 +52,17 @@ export default function Profile() {
               )}
               {ChangePhone && (
                 <input
+                  {...register("phoneNumber")}
                   type="number"
                   className="item-value"
                   placeholder={phoneNumber}
+                  disabled={isUpdating}
+                  onBlur={async () => {
+                    const isValid = await trigger("phoneNumber");
+                    if (isValid) {
+                      handleSubmit((data) => onSubmit(data, id))();
+                    }
+                  }}
                 />
               )}
             </li>
@@ -62,7 +78,19 @@ export default function Profile() {
                 </button>
               )}
               {ChangeEmail && (
-                <input type="text" className="item-value" placeholder={email} />
+                <input
+                  type="email"
+                  className="item-value"
+                  placeholder={email}
+                  {...register("email")}
+                  disabled={isUpdating}
+                  onBlur={async () => {
+                    const isValid = await trigger("email");
+                    if (isValid) {
+                      handleSubmit((data) => onSubmit(data, id))();
+                    }
+                  }}
+                />
               )}
             </li>
             <li className="profile-info-item">
@@ -79,8 +107,17 @@ export default function Profile() {
               {ChangeInsta && (
                 <input
                   type="text"
+                  disabled={isUpdating}
                   className="item-value"
                   placeholder={instagram}
+                  {...register("instagram")}
+                  onBlur={async () => {
+                    const isValid = await trigger("email");
+                    if (isValid) {
+                      handleSubmit((data) => onSubmit(data, id))();
+                      dispatch({ type: "ChangeInsta" });
+                    }
+                  }}
                 />
               )}
             </li>
@@ -97,9 +134,18 @@ export default function Profile() {
               )}
               {ChangeTel && (
                 <input
+                  disabled={isUpdating}
                   type="text"
+                  onBlur={async () => {
+                    const isValid = await trigger("email");
+                    if (isValid) {
+                      handleSubmit((data) => onSubmit(data, id))();
+                      dispatch({ type: "ChangeTel" });
+                    }
+                  }}
                   className="item-value"
                   placeholder={telegram}
+                  {...register("telegram")}
                 />
               )}
             </li>
