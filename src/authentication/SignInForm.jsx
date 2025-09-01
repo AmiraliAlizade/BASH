@@ -10,7 +10,8 @@ function SignInForm() {
     formState: { errors },
   } = useForm();
 
-  const { SignIn } = UseAuth();
+  console.log("Sign In page");
+  const { SignIn, isSigningIn } = UseAuth();
 
   async function onSubmit(data) {
     try {
@@ -30,7 +31,7 @@ function SignInForm() {
             })}
             type="email"
             className="auth-form-input"
-            disabled={false}
+            disabled={isSigningIn}
           />
         </div>
         {errors?.email ? <FormError error={errors?.title?.message} /> : null}
@@ -45,7 +46,7 @@ function SignInForm() {
             min={1}
             max={100000}
             step={1}
-            disabled={false}
+            disabled={isSigningIn}
           />
           {errors?.password ? (
             <FormError error={errors?.password?.message} />

@@ -8,19 +8,15 @@ import FormError from "../../ui/FormError";
 import { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router";
 import { useUserInfo } from "./UserInfoContextProvider";
+import Spinner from "../../ui/Spinner";
 
 function CreateUserForm() {
-  const { user } = UseAuth();
+  const { user, isLoading } = UseAuth();
   const { userInfo, UpdateUserInfo } = useUserInfo();
+
   const firstUser = userInfo?.[0] || {};
   const userId = firstUser?.userId;
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  if (user) {
-    queryClient.invalidateQueries(["UserInfo", user?.id], {
-      refetchInactive: true,
-    });
-  }
 
   const {
     register,
@@ -66,7 +62,11 @@ function CreateUserForm() {
     }
   }
 
-  if (user.id === userId) {
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (user?.id === userId) {
     return <Navigate to="/" />;
   }
 

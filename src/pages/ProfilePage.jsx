@@ -1,13 +1,14 @@
-import Profile from "../components/Profile/Profile";
-
-import UserInfoContextProvider from "../components/Users/UserInfoContextProvider";
+import { Link } from "react-router";
 
 export default function ProfilePage() {
   return (
     <div>
-      <UserInfoContextProvider>
-        <Profile></Profile>
-      </UserInfoContextProvider>
+      <ul className="profile-page-list">
+        <li className="profile-page-item">
+          <Link to="/editProfile">Edit your profile</Link>
+          <Link to="/editAD">Edit your AD</Link>
+        </li>
+      </ul>
     </div>
   );
 }

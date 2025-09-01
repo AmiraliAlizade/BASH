@@ -16,7 +16,7 @@ export default function Profile() {
   const { id, fullName, phoneNumber, email, instagram, telegram } = firstUser;
   const { register, handleSubmit, trigger } = useForm();
   const userId = firstUser?.id;
-
+  console.log(userInfo);
   if (isLoading) {
     return <Spinner />;
   }

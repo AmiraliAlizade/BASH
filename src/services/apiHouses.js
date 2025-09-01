@@ -102,25 +102,7 @@ export async function createHouse(house) {
   }
 }
 
-// export async function createHouse(house) {
-//   try {
-//     const response = await fetch(
-//       "https://rshvopobmfuretiakfat.supabase.co/rest/v1/Houses",
-//       {
-//         method: "POST",
-//         headers: {
-//           Authorization: `Bearer ${SupabaseKey}`,
-//           apikey: SupabaseKey,
-//           Prefer: "return=minimal",
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(house),
-//       }
-//     );
 
-//     const data = await response.json();j
-//     return data;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+export async function editHouse(house , id ){
+  
+}

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import Home from "./pages/HomePage";
 import HouseReviewPage from "./pages/HouseReviewPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -7,10 +7,12 @@ import CreateHouseForm from "./components/houses/CreateHouseForm";
 import { Toaster } from "react-hot-toast";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import Profile from "./components/Profile/Profile";
 import CreateUserForm from "./components/Users/createUserForm";
-import UserContextProvider from "./components/Users/UserInfoContextProvider";
 import ProtectedRoute from "./authentication/ProtectedRoute";
 import UserInfoContextProvider from "./components/Users/UserInfoContextProvider";
+import EditHouseFrom from "./components/houses/EditHouseForm";
+import HouseContextProvider from "./components/houses/HouseContext";
 
 const queryClient = new QueryClient();
 function App() {
@@ -18,6 +20,8 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <Routes>
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/signIn" element={<SignIn />} />
           <Route
             index
             element={
@@ -33,8 +37,9 @@ function App() {
             element={
               <ProtectedRoute>
                 <UserInfoContextProvider>
-                  
-                  <CreateHouseForm />
+                  <HouseContextProvider>
+                    <CreateHouseForm />
+                  </HouseContextProvider>
                 </UserInfoContextProvider>
               </ProtectedRoute>
             }
@@ -49,8 +54,24 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/signIn" element={<SignIn />} />
+          <Route
+            path="/editProfile"
+            element={
+              <ProtectedRoute>
+                <UserInfoContextProvider>
+                  <Profile></Profile>
+                </UserInfoContextProvider>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/editAD"
+            element={
+              <ProtectedRoute>
+                <EditHouseFrom />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </QueryClientProvider>
       <Toaster />

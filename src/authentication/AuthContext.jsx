@@ -25,7 +25,11 @@ function AuthContextProvider({ children }) {
     enabled: !!token,
   });
 
-  const { mutateAsync: signUpMutation, error } = useMutation({
+  const {
+    mutateAsync: signUpMutation,
+    isPending: isSigningUp,
+    error,
+  } = useMutation({
     // mutationFn: (user) => signUpUser(user),
     mutationFn: async ({ email, password }) => {
       const session = await signUpUser({ email, password });
@@ -55,7 +59,11 @@ function AuthContextProvider({ children }) {
       console.error(err);
     },
   });
-  const { mutateAsync: signInMutation } = useMutation({
+  const {
+    mutateAsync: signInMutation,
+    isPending: isSigningIn,
+    error: SignInError,
+  } = useMutation({
     mutationFn: async ({ email, password }) => {
       const session = await signInUser({ email, password });
 
@@ -70,8 +78,9 @@ function AuthContextProvider({ children }) {
         duration: 3000,
         position: "top-center",
       });
-      queryClient.invalidateQueries(["User"]);
-      navigate("/createUser");
+      if (!SignInError) {
+        navigate("/createUser");
+      }
     },
     onError: (err) => {
       toast.error(`The sign in was not successfull !${err.message}`, {
@@ -126,7 +135,17 @@ function AuthContextProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ SignIn, SignUp, LogOut, user, isLoading }}>
+    <AuthContext.Provider
+      value={{
+        SignIn,
+        SignUp,
+        LogOut,
+        user,
+        isLoading,
+        isSigningIn,
+        isSigningUp,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

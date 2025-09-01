@@ -7,14 +7,12 @@ import FormError from "../../ui/FormError";
 import { useUserInfo } from "../Users/UserInfoContextProvider";
 import Spinner from "../../ui/Spinner";
 import { useEffect } from "react";
-import { useHouse } from "./HouseContext";
 
-function CreateHouseForm() {
+function EditHouseForm() {
   const { userInfo, isLoading } = useUserInfo();
   if (isLoading) {
     return <Spinner />;
   }
-  const { setHouse, house } = useHouse();
   const firstUser = userInfo?.[0] || {};
 
   const { fullName, phoneNumber, email, instagram, telegram } = firstUser;
@@ -65,10 +63,8 @@ function CreateHouseForm() {
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
     CreateHouse({ ...data, image: image });
-    setHouse({ ...data, image: image });
     reset();
   }
-  console.log(house);
   return (
     <div
       className="form-wrapper
@@ -210,4 +206,4 @@ function CreateHouseForm() {
   );
 }
 
-export default CreateHouseForm;
+export default EditHouseForm;
