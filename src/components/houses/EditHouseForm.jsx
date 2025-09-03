@@ -8,6 +8,7 @@ import { useUserInfo } from "../Users/UserInfoContextProvider";
 import Spinner from "../../ui/Spinner";
 import { useEffect } from "react";
 import { useHouse } from "./HouseContext";
+import { useNavigate } from "react-router";
 
 function EditHouseForm() {
   const { userInfo, isLoading: isLoadignUser } = useUserInfo();
@@ -16,6 +17,7 @@ function EditHouseForm() {
   }
   const { House, isLoading: isLoadingHouse } = useHouse();
   const firstUser = userInfo?.[0] || {};
+  const navigate = useNavigate();
 
   const firstHouse = House?.[0];
   if (!firstHouse) {
@@ -90,19 +92,18 @@ function EditHouseForm() {
         position: "top-center",
       });
       queryClient.invalidateQueries({
-        queryKey: ["houses"],
+        queryKey: ["Houses"],
       });
+      navigate("/");
     },
     onError: (err) => {
       toast.error(`The house can't be created!${err.message}`, {
         duration: 5000,
         position: "top-center",
       });
-      console.error(err);
     },
   });
 
-  console.log(firstHouse.id);
   useEffect(() => {
     if (firstUser) {
       setValue("user_fullName", fullName);

@@ -9,6 +9,7 @@ import Spinner from "../../ui/Spinner";
 import { useEffect } from "react";
 import { useHouse } from "./HouseContext";
 import { UseAuth } from "../../authentication/AuthContext";
+import { useNavigate } from "react-router";
 
 function CreateHouseForm() {
   const { userInfo, isLoading } = useUserInfo();
@@ -17,6 +18,7 @@ function CreateHouseForm() {
   }
   const { user } = UseAuth();
   const firstUser = userInfo?.[0] || {};
+  const navigate = useNavigate();
 
   const { fullName, phoneNumber, email, instagram, telegram } = firstUser;
 
@@ -44,8 +46,9 @@ function CreateHouseForm() {
         position: "top-center",
       });
       queryClient.invalidateQueries({
-        queryKey: ["houses"],
+        queryKey: ["Houses"],
       });
+      navigate("/");
     },
     onError: (err) => {
       toast.error(`The house can't be created!${err.message}`, {
