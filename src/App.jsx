@@ -13,6 +13,7 @@ import ProtectedRoute from "./authentication/ProtectedRoute";
 import UserInfoContextProvider from "./components/Users/UserInfoContextProvider";
 import EditHouseFrom from "./components/houses/EditHouseForm";
 import HouseContextProvider from "./components/houses/HouseContext";
+import AuthContextProvider from "./authentication/AuthContext";
 
 const queryClient = new QueryClient();
 function App() {
@@ -25,9 +26,11 @@ function App() {
           <Route
             index
             element={
-              <ProtectedRoute>
-                <Home replace to="home" />
-              </ProtectedRoute>
+              <AuthContextProvider>
+                <ProtectedRoute>
+                  <Home replace to="home" />
+                </ProtectedRoute>
+              </AuthContextProvider>
             }
           />
           <Route path="/houseReview" element={<HouseReviewPage />} />
@@ -35,41 +38,53 @@ function App() {
           <Route
             path="/registerAd"
             element={
-              <ProtectedRoute>
-                <UserInfoContextProvider>
-                  <HouseContextProvider>
-                    <CreateHouseForm />
-                  </HouseContextProvider>
-                </UserInfoContextProvider>
-              </ProtectedRoute>
+              <AuthContextProvider>
+                <ProtectedRoute>
+                  <UserInfoContextProvider>
+                    <HouseContextProvider>
+                      <CreateHouseForm />
+                    </HouseContextProvider>
+                  </UserInfoContextProvider>
+                </ProtectedRoute>
+              </AuthContextProvider>
             }
           />
           <Route
             path="/createUser"
             element={
-              <ProtectedRoute>
-                <UserInfoContextProvider>
-                  <CreateUserForm />
-                </UserInfoContextProvider>
-              </ProtectedRoute>
+              <AuthContextProvider>
+                <ProtectedRoute>
+                  <UserInfoContextProvider>
+                    <CreateUserForm />
+                  </UserInfoContextProvider>
+                </ProtectedRoute>
+              </AuthContextProvider>
             }
           />
           <Route
             path="/editProfile"
             element={
-              <ProtectedRoute>
-                <UserInfoContextProvider>
-                  <Profile></Profile>
-                </UserInfoContextProvider>
-              </ProtectedRoute>
+              <AuthContextProvider>
+                <ProtectedRoute>
+                  <UserInfoContextProvider>
+                    <Profile></Profile>
+                  </UserInfoContextProvider>
+                </ProtectedRoute>
+              </AuthContextProvider>
             }
           />
           <Route
             path="/editAD"
             element={
-              <ProtectedRoute>
-                <EditHouseFrom />
-              </ProtectedRoute>
+              <AuthContextProvider>
+                <ProtectedRoute>
+                  <UserInfoContextProvider>
+                    <HouseContextProvider>
+                      <EditHouseFrom />
+                    </HouseContextProvider>
+                  </UserInfoContextProvider>
+                </ProtectedRoute>
+              </AuthContextProvider>
             }
           />
         </Routes>

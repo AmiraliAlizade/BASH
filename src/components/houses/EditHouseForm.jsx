@@ -1,39 +1,91 @@
 import { useForm } from "react-hook-form";
 import "./CreateHouseForm.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createHouse } from "../../services/apiHouses";
+import { createHouse, editHouse } from "../../services/apiHouses";
 import toast from "react-hot-toast";
 import FormError from "../../ui/FormError";
 import { useUserInfo } from "../Users/UserInfoContextProvider";
 import Spinner from "../../ui/Spinner";
 import { useEffect } from "react";
+import { useHouse } from "./HouseContext";
 
 function EditHouseForm() {
-  const { userInfo, isLoading } = useUserInfo();
-  if (isLoading) {
+  const { userInfo, isLoading: isLoadignUser } = useUserInfo();
+  if (isLoadignUser) {
     return <Spinner />;
   }
+  const { House, isLoading: isLoadingHouse } = useHouse();
   const firstUser = userInfo?.[0] || {};
 
+  const firstHouse = House?.[0];
+  if (!firstHouse) {
+    return <Spinner />;
+  }
+  if (isLoadingHouse) {
+    return <Spinner />;
+  }
+  const {
+    title,
+    size,
+    price,
+    madeIn,
+    address,
+    description,
+    numBathroom,
+    numBedroom,
+  } = firstHouse;
   const { fullName, phoneNumber, email, instagram, telegram } = firstUser;
-
+  console.log(House);
   const {
     register,
     handleSubmit,
     reset,
     setValue,
+    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title,
+      size,
+      price,
+      madeIn,
+      address,
+      description,
+      numBathroom,
+      numBedroom,
+    },
+  });
 
+  const formValues = {
+    titleValue: watch("title"),
+    sizeValue: watch("size"),
+    priceValue: watch("price"),
+    madeInValue: watch("madeIn"),
+    addressValue: watch("address"),
+    descriptionValue: watch("description"),
+    numBathroomValue: watch("numBathroom"),
+    numBedroomValue: watch("numBedroom"),
+  };
+
+  const {
+    titleValue,
+    sizeValue,
+    priceValue,
+    madeInValue,
+    addressValue,
+    descriptionValue,
+    numBathroomValue,
+    numBedroomValue,
+  } = formValues;
   const queryClient = useQueryClient();
   const {
-    mutate: CreateHouse,
+    mutateAsync: EditHouse,
     isPending,
     error,
   } = useMutation({
-    mutationFn: createHouse,
+    mutationFn: ({ updatedHouse, id }) => editHouse({ updatedHouse, id }),
     onSuccess: () => {
-      toast.success("The house was successfully created!", {
+      toast.success("The house was successfully updated !", {
         duration: 3000,
         position: "top-center",
       });
@@ -50,6 +102,7 @@ function EditHouseForm() {
     },
   });
 
+  console.log(firstHouse.id);
   useEffect(() => {
     if (firstUser) {
       setValue("user_fullName", fullName);
@@ -62,7 +115,23 @@ function EditHouseForm() {
 
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
-    CreateHouse({ ...data, image: image });
+    const finalData = {
+      ...firstHouse,
+      title: titleValue !== "" ? titleValue : firstHouse.title,
+      size: titleValue !== "" ? sizeValue : firstHouse.size,
+      price: titleValue !== "" ? priceValue : firstHouse.price,
+      madeIn: titleValue !== "" ? madeInValue : firstHouse.madeIn,
+      address: titleValue !== "" ? addressValue : firstHouse.address,
+      description:
+        titleValue !== "" ? descriptionValue : firstHouse.description,
+      numBathroom:
+        titleValue !== "" ? numBathroomValue : firstHouse.numBathroom,
+      numBedroom: titleValue !== "" ? numBedroomValue : firstHouse.numBathroom,
+    };
+    EditHouse({
+      updatedHouse: { ...finalData, image },
+      id: firstHouse?.id,
+    });
     reset();
   }
   return (
@@ -80,6 +149,7 @@ function EditHouseForm() {
             type="text"
             className="house-form-input"
             disabled={isPending}
+            defaultValue={title}
           />
         </div>
         {errors?.title ? <FormError error={errors?.title?.message} /> : null}
@@ -95,6 +165,7 @@ function EditHouseForm() {
             max={100000}
             step={1}
             disabled={isPending}
+            defaultValue={size}
           />
           {errors?.size ? <FormError error={errors?.size?.message} /> : null}
         </div>
@@ -110,6 +181,7 @@ function EditHouseForm() {
             max={100000000}
             step={1}
             disabled={isPending}
+            defaultValue={price}
           />
           {errors?.price ? <FormError error={errors?.price?.message} /> : null}
         </div>
@@ -124,6 +196,7 @@ function EditHouseForm() {
             min={1}
             step={1}
             disabled={isPending}
+            defaultValue={madeIn}
           />
           {errors?.madeIn ? (
             <FormError error={errors?.madeIn?.message} />
@@ -137,6 +210,7 @@ function EditHouseForm() {
             })}
             className="house-form-input"
             disabled={isPending}
+            defaultValue={address}
           />
           {errors?.address ? (
             <FormError error={errors?.address?.message} />
@@ -150,6 +224,7 @@ function EditHouseForm() {
             })}
             className="house-form-input"
             disabled={isPending}
+            defaultValue={description}
           />
           {errors?.description ? (
             <FormError error={errors?.description?.message} />
@@ -168,6 +243,7 @@ function EditHouseForm() {
             max={10}
             min={1}
             disabled={isPending}
+            defaultValue={numBathroom}
           />
           {errors?.numBathroom ? (
             <FormError error={errors?.numBathroom?.message} />
@@ -184,6 +260,7 @@ function EditHouseForm() {
             min={1}
             max={20}
             disabled={isPending}
+            defaultValue={numBedroom}
           />
           {errors?.numBedroom ? (
             <FormError error={errors?.numBedroom?.message} />

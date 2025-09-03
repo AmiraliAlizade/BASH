@@ -15,6 +15,7 @@ const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem("access_token"));
+  const [authChecked, setAuthChecked] = useState(true);
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
@@ -25,6 +26,7 @@ function AuthContextProvider({ children }) {
     enabled: !!token,
   });
 
+  const userId = user?.id;
   const {
     mutateAsync: signUpMutation,
     isPending: isSigningUp,
@@ -46,8 +48,10 @@ function AuthContextProvider({ children }) {
         duration: 3000,
         position: "top-center",
       });
+
       queryClient.invalidateQueries(["User"]);
       if (!error) {
+        setAuthChecked(true);
         navigate("/createUser");
       }
     },
@@ -59,6 +63,7 @@ function AuthContextProvider({ children }) {
       console.error(err);
     },
   });
+
   const {
     mutateAsync: signInMutation,
     isPending: isSigningIn,
@@ -73,14 +78,18 @@ function AuthContextProvider({ children }) {
 
       return session;
     },
+
     onSuccess: () => {
       toast.success("Sign in was successfull !", {
         duration: 3000,
         position: "top-center",
       });
+
+      navigate("/createUser");
       if (!SignInError) {
-        navigate("/createUser");
       }
+      setAuthChecked(true);
+      console.log(authChecked);
     },
     onError: (err) => {
       toast.error(`The sign in was not successfull !${err.message}`, {
@@ -144,6 +153,8 @@ function AuthContextProvider({ children }) {
         isLoading,
         isSigningIn,
         isSigningUp,
+        token,
+        authChecked,
       }}
     >
       {children}

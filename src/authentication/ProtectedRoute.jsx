@@ -3,7 +3,11 @@ import { UseAuth } from "./AuthContext";
 import Spinner from "../ui/Spinner";
 
 export default function ProtectedRoute({ children }) {
-  const token = localStorage.getItem("access_token");
+  const { token, authChecked } = UseAuth();
+
+  if (!authChecked) {
+    return <Spinner />;
+  }
 
   if (!token) {
     return <Navigate to="/signUp" replace />;

@@ -36,9 +36,8 @@ export default function Navbar() {
               <li>
                 <button
                   className="login-button"
-                  onClick={() => {
-                    LogOut(user.access_token),
-                      navigate("/signIn", { replace: true });
+                  onClick={async () => {
+                    await LogOut(user?.access_token), navigate("/signIn");
                   }}
                 >
                   <FaUser className="user-icon"></FaUser>

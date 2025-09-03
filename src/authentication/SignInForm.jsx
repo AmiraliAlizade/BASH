@@ -10,7 +10,6 @@ function SignInForm() {
     formState: { errors },
   } = useForm();
 
-  console.log("Sign In page");
   const { SignIn, isSigningIn } = UseAuth();
 
   async function onSubmit(data) {

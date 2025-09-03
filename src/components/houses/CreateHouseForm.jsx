@@ -8,17 +8,21 @@ import { useUserInfo } from "../Users/UserInfoContextProvider";
 import Spinner from "../../ui/Spinner";
 import { useEffect } from "react";
 import { useHouse } from "./HouseContext";
+import { UseAuth } from "../../authentication/AuthContext";
 
 function CreateHouseForm() {
   const { userInfo, isLoading } = useUserInfo();
   if (isLoading) {
     return <Spinner />;
   }
-  const { setHouse, house } = useHouse();
+  const { user } = UseAuth();
   const firstUser = userInfo?.[0] || {};
 
   const { fullName, phoneNumber, email, instagram, telegram } = firstUser;
 
+  if (!user) {
+    return <Spinner />;
+  }
   const {
     register,
     handleSubmit,
@@ -59,16 +63,17 @@ function CreateHouseForm() {
       setValue("user_email", email);
       setValue("user_instagram", instagram);
       setValue("user_telegram", telegram);
+      setValue("userId", user?.id);
     }
   }, [firstUser, setValue]);
 
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
     CreateHouse({ ...data, image: image });
-    setHouse({ ...data, image: image });
+
     reset();
   }
-  console.log(house);
+
   return (
     <div
       className="form-wrapper

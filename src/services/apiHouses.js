@@ -1,4 +1,4 @@
-import { supabaseUrl } from "./supabase";
+import { supabaseKey, supabaseUrl } from "./supabase";
 
 export async function getHouses() {
   const SupabaseKey =
@@ -102,7 +102,50 @@ export async function createHouse(house) {
   }
 }
 
+export async function getUserHouse(userId) {
+  try {
+    const response = await fetch(
+      `${supabaseUrl}/rest/v1/Houses?userId=eq.${userId}&select=*`,
+      {
+        method: "GET",
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-export async function editHouse(house , id ){
-  
+    console.log("Response status:", response.status);
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function editHouse({ updatedHouse, id }) {
+  try {
+    const response = await fetch(
+      `https://rshvopobmfuretiakfat.supabase.co/rest/v1/Houses?id=eq.${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          "Content-Type": "application/json",
+          Prefer: "return=representation",
+        },
+        body: JSON.stringify(updatedHouse),
+      }
+    );
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
 }
