@@ -33,8 +33,24 @@ function App() {
               </AuthContextProvider>
             }
           />
-          <Route path="/houseReview" element={<HouseReviewPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route
+            path="/houseReview"
+            element={
+              <ProtectedRoute>
+                <HouseReviewPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <HouseContextProvider>
+                  <ProfilePage />
+                </HouseContextProvider>
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/registerAd"
             element={

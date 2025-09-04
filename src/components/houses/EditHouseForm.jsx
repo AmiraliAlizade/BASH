@@ -20,9 +20,9 @@ function EditHouseForm() {
   const navigate = useNavigate();
 
   const firstHouse = House?.[0];
-  if (!firstHouse) {
-    return <Spinner />;
-  }
+  // if (!firstHouse) {
+  //   return <Spinner />;
+  // }
   if (isLoadingHouse) {
     return <Spinner />;
   }
