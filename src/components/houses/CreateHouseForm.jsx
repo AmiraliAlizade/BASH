@@ -141,6 +141,13 @@ function CreateHouseForm() {
             <FormError error={errors?.madeIn?.message} />
           ) : null}
         </div>
+
+        <div className="house-form-item">
+          <label className="house-form-label"></label>
+          <select>
+            <option value=""></option>
+          </select>
+        </div>
         <div className="house-form-item">
           <label className="house-form-label">Address</label>
           <textarea

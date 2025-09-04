@@ -1,0 +1,10 @@
+.search-input-wrapper input:focus {
+  width: 80%;
+  border: 3px solid #022f8fdc;
+  transform: none;
+  transition: all 0.4s;
+}
+.search-input-wrapper {
+  width: 60%;
+  display: flex;
+}

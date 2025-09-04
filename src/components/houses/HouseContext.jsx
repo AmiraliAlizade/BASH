@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createContext, useContext, useState } from "react";
-import { deleteHouse, getUserHouse } from "../../services/apiHouses";
+import { deleteHouse, getHouses, getUserHouse } from "../../services/apiHouses";
 import { UseAuth } from "../../authentication/AuthContext";
 import Spinner from "../../ui/Spinner";
 import toast from "react-hot-toast";
@@ -10,12 +10,20 @@ const HouseContext = createContext();
 
 function HouseContextProvider({ children }) {
   const { user, authChecked } = UseAuth();
-  const queryClient  = useQueryClient()
-  const navigate = useNavigate()
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   if (!user) {
     <Spinner />;
   }
+  const {
+    data: Houses,
+    isLoading: isLoadingHouses,
+    error: getHousesError,
+  } = useQuery({
+    queryKey: ["Houses"],
+    queryFn: getHouses,
+  });
 
   const {
     data: House,
@@ -65,7 +73,7 @@ function HouseContextProvider({ children }) {
 
   return (
     <HouseContext.Provider
-      value={{ House: House || [], error, isLoading, DeleteHouse }}
+      value={{ House: House || [], Houses, error, isLoading, DeleteHouse }}
     >
       {children}
     </HouseContext.Provider>

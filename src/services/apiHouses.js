@@ -28,12 +28,15 @@ export async function getHouses() {
 }
 
 export async function createHouse(house) {
-  const imageName = `${Math.random()}-${house.image.name}`.replaceAll("/", "");
+  const imageName = `${Math.random()}-${house?.image?.name}`.replaceAll(
+    "/",
+    ""
+  );
 
-  const hasImagePath = house.image.startsWith?.(supabaseUrl);
+  const hasImagePath = house?.image?.startsWith?.(supabaseUrl);
 
   const imagePath = hasImagePath
-    ? house.image
+    ? house?.image
     : `https://rshvopobmfuretiakfat.supabase.co/storage/v1/object/public/Images//${imageName}`;
 
   const SupabaseKey =

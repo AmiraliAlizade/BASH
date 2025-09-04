@@ -5,22 +5,34 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import { FaDollarSign } from "react-icons/fa";
 import Paragraph from "../../ui/Paragraph";
 import Error from "../../ui/Error";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import Spinner from "../../ui/Spinner";
+import { useHouse } from "./HouseContext";
 
-function StyledHousesList({ Houses, isLoading, error }) {
+function StyledHousesList() {
+  const { Houses, error, isLoading } = useHouse();
+  const [searchParam] = useSearchParams();
+  const search = searchParam.get("q")?.toLocaleLowerCase() || "";
+
   if (isLoading) {
     return <Spinner />;
   }
   if (error) {
     return <Error>Could not load the Houses!</Error>;
   }
+
+  const filteredHouses = Houses.filter((House) => {
+    const titleMatch = House.title?.toLowerCase().includes(search);
+    const addressMatch = House.address?.toLowerCase().includes(search);
+
+    return titleMatch || addressMatch;
+  });
   return (
     <>
       <div className="houses-list-container">
         <div className="">
           <ul className="houses-list">
-            {Houses?.map((House) => (
+            {filteredHouses?.map((House) => (
               <Link
                 to="/housereview"
                 style={{
@@ -49,6 +61,10 @@ function StyledHousesList({ Houses, isLoading, error }) {
                       </span>
                       <span className="house-size">
                         {House.size}
+                        <TbMeterSquare className="meter-icon"></TbMeterSquare>
+                      </span>
+                      <span className="house-size">
+                        {House.province}
                         <TbMeterSquare className="meter-icon"></TbMeterSquare>
                       </span>
                     </div>

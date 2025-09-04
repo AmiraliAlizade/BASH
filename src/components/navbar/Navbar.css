@@ -29,10 +29,6 @@ body{
     height: 50px;
 }
 
-.navbar-search {
-  width: 60%;
-  display: flex;
-}
 
 .navbar-header input{
     outline: none;
@@ -43,12 +39,6 @@ body{
     border: 0.5px solid #fdfdfd;
 }
 
-.navbar-search input:focus{
-    width: 80%;
-    border: 3px solid #022f8fdc;
-    transform: none;
-    transition: all 0.4s;
-}
 
 .navbar-links{
     width: 30%;
