@@ -149,3 +149,26 @@ export async function editHouse({ updatedHouse, id }) {
     throw new Error(error);
   }
 }
+
+export async function deleteHouse(houseId) {
+  try {
+    const response = await fetch(
+      `https://rshvopobmfuretiakfat.supabase.co/rest/v1/Houses?id=eq.${houseId}`,
+      {
+        method: "DELETE",
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          "Content-Type": "application/json",
+          Prefer: "return=representation",
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}

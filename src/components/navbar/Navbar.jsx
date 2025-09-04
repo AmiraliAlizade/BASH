@@ -2,11 +2,13 @@ import "./Navbar.css";
 import house from "../../data/bash-high-resolution-logo.png";
 import { FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
+import Spinner from "../../ui/Spinner";
 import { UseAuth } from "../../authentication/AuthContext";
 
 export default function Navbar() {
   const { LogOut, user } = UseAuth();
   const navigate = useNavigate();
+
 
   return (
     <header className="navbar-header">
@@ -23,16 +25,14 @@ export default function Navbar() {
         </div>
         <div className="navbar-links">
           <ul>
-            {!user?.email ? (
-              <Link to="/signUp">
-                <li>
-                  <button className="login-button">
-                    <FaUser className="user-icon"></FaUser>
-                    Sign up/Sign In
-                  </button>
-                </li>
-              </Link>
-            ) : (
+            {!user?.email ? //   <li> // <Link to="/signUp">
+            //     <button className="login-button">
+            //       <FaUser className="user-icon"></FaUser>
+            //       Sign up/Sign In
+            //     </button>
+            //   </li>
+            // </Link>
+            null : (
               <li>
                 <button
                   className="login-button"

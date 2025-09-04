@@ -69,6 +69,7 @@ function CreateUserForm() {
   if (user?.id === userId) {
     return <Navigate to="/" />;
   }
+  if (user?.id === userId) return <Spinner />;
 
   return (
     <div className="form-wrapper">
