@@ -8,6 +8,7 @@ import SearchInput from "../../ui/SearchInput";
 
 export default function Navbar() {
   const { LogOut, user } = UseAuth();
+
   const navigate = useNavigate();
 
   return (
@@ -19,10 +20,7 @@ export default function Navbar() {
         <SearchInput />
         <div className="navbar-links">
           <ul>
-            {!user?.email ? //     <button className="login-button"> //   <li> // <Link to="/signUp">
-            //       <FaUser className="user-icon"></FaUser>
-            //       Sign up/Sign In
-            //     </button>
+            {!user?.email ? //     </button> //       Sign up/Sign In //       <FaUser className="user-icon"></FaUser> //     <button className="login-button"> //   <li> // <Link to="/signUp">
             //   </li>
             // </Link>
             null : (

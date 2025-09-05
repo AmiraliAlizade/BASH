@@ -5,8 +5,17 @@ import help from "../../data/help_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png";
 import account from "../../data/account_circle_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.png";
 import { Link } from "react-router";
 import { CiSquarePlus } from "react-icons/ci";
+import { useHouse } from "../houses/HouseContext";
 
 export default function Sidebar() {
+  const { House, isLoading } = useHouse();
+
+  const firstHouse = House?.[0] || null;
+
+  // if (isLoading) {
+  //   return null;
+  // }
+
   return (
     <>
       <div className="sidebar">
@@ -17,12 +26,15 @@ export default function Sidebar() {
               My profile
             </li>
           </Link>
-          <Link to="/registerAd" className="sidebar-item">
-            <li style={{ display: "flex", alignItems: "center", gap: "2px" }}>
-              <CiSquarePlus size={30} />
-              Register your AD
-            </li>
-          </Link>
+          {!firstHouse && (
+            <Link to="/registerAd" className="sidebar-item">
+              <li style={{ display: "flex", alignItems: "center", gap: "2px" }}>
+                <CiSquarePlus size={30} />
+                Register your AD
+              </li>
+            </Link>
+          )}
+
           <li
             className="sidebar-item"
             style={{ display: "flex", alignItems: "center", gap: "2px" }}

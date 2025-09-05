@@ -5,6 +5,7 @@ import ContactModal from "../components/Modals/ContactModal";
 import AuthContextProvider from "../authentication/AuthContext";
 
 import UserInfoContextProvider from "../components/Users/UserInfoContextProvider";
+import HouseContextProvider from "../components/houses/HouseContext";
 
 export default function HouseReviewPage() {
   return (
@@ -13,7 +14,9 @@ export default function HouseReviewPage() {
         <Navbar></Navbar>
       </AuthContextProvider>
       <div style={{ display: "flex", width: "100%" }}>
-        <Sidebar></Sidebar>
+        <HouseContextProvider>
+          <Sidebar></Sidebar>
+        </HouseContextProvider>
         <HouseReview></HouseReview>
       </div>
     </UserInfoContextProvider>

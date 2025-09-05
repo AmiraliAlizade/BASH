@@ -21,7 +21,7 @@ function StyledHousesList() {
     return <Error>Could not load the Houses!</Error>;
   }
 
-  const filteredHouses = Houses.filter((House) => {
+  const filteredHouses = Houses?.filter((House) => {
     const titleMatch = House.title?.toLowerCase().includes(search);
     const addressMatch = House.address?.toLowerCase().includes(search);
 

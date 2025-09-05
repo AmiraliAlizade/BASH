@@ -2,17 +2,16 @@ import { Link, Navigate, useNavigate } from "react-router";
 
 import "../components/Profile/ProfilePage.css";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-import { deleteHouse } from "../services/apiHouses";
+
 import { useHouse } from "../components/houses/HouseContext";
-import Spinner from "../ui/Spinner";
+
 import { CiSquarePlus } from "react-icons/ci";
-import toast from "react-hot-toast";
 
 export default function ProfilePage() {
   const { House, DeleteHouse } = useHouse();
   const firstHouse = House?.[0];
   const navigate = useNavigate();
-  const { id: houseId } = firstHouse || {};
+  // const { id: houseId } = firstHouse || {};
   if (!firstHouse) {
     <Navigate to="/editProfile" />;
   }

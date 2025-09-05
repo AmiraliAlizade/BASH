@@ -63,9 +63,9 @@ function HouseContextProvider({ children }) {
   console.log(House);
   if (!authChecked) return <Spinner />;
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
 
   if (error) {
     toast.error(error.message);

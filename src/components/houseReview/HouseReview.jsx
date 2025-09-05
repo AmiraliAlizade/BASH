@@ -18,7 +18,6 @@ export default function HouseReview() {
   const location = useLocation();
   const { House } = location.state || {};
 
-
   return (
     <>
       <div className="house-review-wrapper">
@@ -101,7 +100,11 @@ export default function HouseReview() {
         </div>
       </div>
       {isOpen ? (
-        <ContactModal isOpen={isOpen} setIsOpen={setIsOpen} House={House}></ContactModal>
+        <ContactModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          House={House}
+        ></ContactModal>
       ) : null}
     </>
   );

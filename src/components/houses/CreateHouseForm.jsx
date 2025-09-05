@@ -9,13 +9,52 @@ import Spinner from "../../ui/Spinner";
 import { useEffect } from "react";
 import { useHouse } from "./HouseContext";
 import { UseAuth } from "../../authentication/AuthContext";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 
 function CreateHouseForm() {
   const { userInfo, isLoading } = useUserInfo();
+  const { House } = useHouse();
+  const firstHouse = House?.[0] || null;
+
+  if (firstHouse) {
+    return <Navigate to="/" />;
+  }
   if (isLoading) {
     return <Spinner />;
   }
+  const iranProvinces = [
+    "Alborz",
+    "Ardabil",
+    "Bushehr",
+    "Chaharmahal and Bakhtiari",
+    "East Azerbaijan",
+    "Isfahan",
+    "Fars",
+    "Gilan",
+    "Golestan",
+    "Hamadan",
+    "Hormozgan",
+    "Ilam",
+    "Kerman",
+    "Kermanshah",
+    "Khuzestan",
+    "Kohgiluyeh and Boyer-Ahmad",
+    "Kurdistan",
+    "Lorestan",
+    "Markazi",
+    "Mazandaran",
+    "North Khorasan",
+    "Qazvin",
+    "Qom",
+    "Razavi Khorasan",
+    "Semnan",
+    "Sistan and Baluchestan",
+    "South Khorasan",
+    "Tehran",
+    "West Azerbaijan",
+    "Yazd",
+    "Zanjan",
+  ];
   const { user } = UseAuth();
   const firstUser = userInfo?.[0] || {};
   const navigate = useNavigate();
@@ -143,9 +182,17 @@ function CreateHouseForm() {
         </div>
 
         <div className="house-form-item">
-          <label className="house-form-label"></label>
-          <select>
-            <option value=""></option>
+          <label className="house-form-label">Province</label>
+          <select
+            {...register("province", { required: true })}
+            className="house-form-select"
+          >
+            <option value="">Select province</option>
+            {iranProvinces.map((province) => (
+              <option value={province} key={province}>
+                {province}{" "}
+              </option>
+            ))}
           </select>
         </div>
         <div className="house-form-item">

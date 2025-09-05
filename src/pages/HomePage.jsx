@@ -5,6 +5,7 @@ import { getHouses } from "../services/apiHouses";
 import AuthContextProvider from "../authentication/AuthContext";
 import ProtectedRoute from "../authentication/ProtectedRoute";
 import UserInfoContextProvider from "../components/Users/UserInfoContextProvider";
+import HouseContextProvider from "../components/houses/HouseContext";
 
 export default function Home() {
   return (
@@ -22,7 +23,11 @@ export default function Home() {
             }}
           >
             <Houses></Houses>
-            <Sidebar></Sidebar>
+            <AuthContextProvider>
+              <HouseContextProvider>
+                <Sidebar />
+              </HouseContextProvider>
+            </AuthContextProvider>
           </div>
         </div>
       </AuthContextProvider>

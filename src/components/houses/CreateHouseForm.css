@@ -76,12 +76,35 @@
   cursor: pointer;
 }
 
-.house-form-date:focus {
+.house-form-select {
+  appearance: none; /* Remove default browser style */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-color: #f9f9f9;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  color: #333;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+
+.house-form-select:focus {
   border-color: #4f46e5; /* Indigo shade */
   box-shadow: 0 0 6px rgba(79, 70, 229, 0.4);
   background-color: #fff;
 }
 
+.house-form-date:focus {
+  border-color: #4f46e5; /* Indigo shade */
+  box-shadow: 0 0 6px rgba(79, 70, 229, 0.4);
+  background-color: #fff;
+}
 .house-form-date::-webkit-calendar-picker-indicator {
   background: url("data:image/svg+xml;utf8,<svg fill='gray' xmlns='http://www.w3.org/2000/svg' height='20' width='20' viewBox='0 0 24 24'><path d='M7 10l5 5 5-5z'/></svg>")
     no-repeat center;

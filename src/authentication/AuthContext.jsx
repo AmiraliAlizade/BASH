@@ -11,11 +11,12 @@ import {
   signUpUser,
 } from "../services/apiAuthentication";
 import { useUserInfo } from "../components/Users/UserInfoContextProvider";
+import Spinner from "../ui/Spinner";
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem("access_token"));
-  const [authChecked, setAuthChecked] = useState(true);
+  const [authChecked, setAuthChecked] = useState(false);
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
@@ -26,7 +27,13 @@ function AuthContextProvider({ children }) {
     enabled: !!token,
   });
 
-  const userId = user?.id;
+  console.log(user);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setAuthChecked(true);
+    }
+  }, [isLoading]);
   const {
     mutateAsync: signUpMutation,
     isPending: isSigningUp,
@@ -86,8 +93,7 @@ function AuthContextProvider({ children }) {
       });
 
       navigate("/createUser");
-      if (!SignInError) {
-      }
+
       setAuthChecked(true);
       console.log(authChecked);
     },
@@ -112,6 +118,7 @@ function AuthContextProvider({ children }) {
   async function LogOut(access_token) {
     const data = await logOutUserMutation(access_token);
     queryClient.invalidateQueries(["User"]);
+    setAuthChecked(true);
     navigate("/signUp");
     setToken(null);
   }
@@ -143,6 +150,9 @@ function AuthContextProvider({ children }) {
     }
   }
 
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <AuthContext.Provider
       value={{
